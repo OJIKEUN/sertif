@@ -1,0 +1,45 @@
+﻿<header class="header">
+	<div class="toggle-btns">
+		<a id="toggle-sidebar" href="#">
+			<i class="icon-menu1"></i>
+		</a>
+		<a id="pin-sidebar" href="#">
+			<i class="icon-menu1"></i>
+		</a>
+	</div>
+	<div class="header-items">
+		<!-- Header actions start -->
+        <ul class="header-actions">
+            <li class="dropdown">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="#" id="userSettings" class="user-settings" data-bs-toggle="dropdown" aria-haspopup="true">
+                        <span class="icon-user"></span>
+                        <span class="avatar"></span>
+                        <span class="">Hello, @User.Identity?.Name</span>
+                        <span class="avatar"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
+                        <div class="header-profile-actions">
+                            <div class="header-user-profile">
+                                <div class="header-user">
+                                </div>
+                                <h5>Hello, @User.Identity?.Name</h5>
+                                <p>@User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value</p>
+                            </div>
+                            <a href="user-profile.html"><i class="icon-user"></i> My Profile</a>
+                            <form asp-controller="Auth" asp-action="Logout" method="post">
+                                <button type="submit" class="dropdown-item"><i class="icon-log-out1"></i> Sign Out</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <a asp-controller="Auth" asp-action="Login" class="nav-link">Login</a>
+                }
+            </li>
+        </ul>
+		<!-- Header actions end -->
+	</div>
+</header>

@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Labor</title>
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+
+    <!-- Icomoon Font Icons css -->
+    <link rel="stylesheet" href="~/fonts/style.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/css/main.css">
+
+    <link href="~/vendor/notyf/notyf.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <!-- SweetAlert2 -->
+    <link href="~/vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+</head>
+<body>
+	<!-- Loading starts -->
+	@* <div id="loading-wrapper">
+		<div class="spinner-border"></div>
+		Loading...
+	</div> *@
+	<!-- Loading ends -->
+	<!-- Page wrapper start -->
+	<div class="page-wrapper">
+
+		<!-- Sidebar wrapper start -->
+		<partial name="_Sidebar" />
+		<!-- Sidebar wrapper end -->
+		<!-- Page content start  -->
+		<div class="page-content">
+
+			<!-- Header start -->
+			<partial name="_Header" />
+			<!-- Header end -->
+			<!-- Page header start -->
+			<div class="page-header">
+			</div>
+			<!-- Page header end -->
+			<!-- Main container start -->
+            <div class="main-container">
+                <main role="main">
+                    @RenderBody()
+                </main>
+            </div>
+			<!-- Main container end -->
+
+		</div>
+		<!-- Page content end -->
+
+	</div>
+
+    <!-- Required jQuery first, then Bootstrap Bundle JS -->
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/moment.js"></script>
+
+    <!-- ************
+    ************ Vendor Js Files ************
+    ************ -->
+    <!-- Slimscroll JS -->
+    <script src="~/vendor/slimscroll/slimscroll.min.js"></script>
+    <script src="~/vendor/slimscroll/custom-scrollbar.js"></script>
+
+    <!-- Daterange -->
+    <script src="~/vendor/daterange/daterange.js"></script>
+    <script src="~/vendor/daterange/custom-daterange.js"></script>
+
+    <!-- Apex Charts -->
+    <script src="~/vendor/apex/apexcharts.min.js"></script>
+
+    <!-- notyf -->
+    <script src="~/vendor/notyf/notyf.es.js"></script>
+    <script src="~/vendor/notyf/notyf.es.min.js"></script>
+    <script src="~/vendor/notyf/notyf.min.js"></script>
+    <script src="~/vendor/notyf/notyf.umd.js"></script>
+    <script src="~/vendor/notyf/notyf.umd.min.js"></script>
+
+    <!-- sweetalert2 -->
+    <script src="~/vendor/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="~/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+        
+</body>
+</html>
