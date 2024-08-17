@@ -24,6 +24,7 @@ namespace sertif.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            ViewData["Layout"] = "_AuthLayout";
             return View();
         }
 
@@ -92,24 +93,11 @@ namespace sertif.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        /*private bool VerifyPassword(string inputPassword, string storedPassword)
-        {
-            // Jika password belum di-hash, lakukan perbandingan langsung
-            if (!storedPassword.StartsWith("$"))
-            {
-                return inputPassword == storedPassword;
-            }
-
-            // Jika sudah di-hash, gunakan PasswordHasher
-            var result = _passwordHasher.VerifyHashedPassword(null, storedPassword, inputPassword);
-            return result == PasswordVerificationResult.Success || result == PasswordVerificationResult.SuccessRehashNeeded;
-        }*/
-
-
         //register
         [HttpGet]
         public IActionResult Register()
         {
+            ViewData["Layout"] = "_AuthLayout";
             return View();
         }
 
@@ -129,6 +117,19 @@ namespace sertif.Controllers
                 user.Password = _passwordHasher.HashPassword(user, model.Password);
 
                 _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+
+                // Tambahkan kode ini
+                if (user.Role == UserRole.Student)
+                {
+                    var student = new Student { UserId = user.UserId };
+                    _context.Students.Add(student);
+                }
+                else if (user.Role == UserRole.Laboran)
+                {
+                    var laboran = new Laboran { UserId = user.UserId };
+                    _context.Laborans.Add(laboran);
+                }
                 await _context.SaveChangesAsync();
 
                 // Otomatis login setelah registrasi

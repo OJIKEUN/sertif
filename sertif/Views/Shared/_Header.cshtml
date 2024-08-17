@@ -1,14 +1,14 @@
 ﻿<header class="header">
-	<div class="toggle-btns">
-		<a id="toggle-sidebar" href="#">
-			<i class="icon-menu1"></i>
-		</a>
-		<a id="pin-sidebar" href="#">
-			<i class="icon-menu1"></i>
-		</a>
-	</div>
-	<div class="header-items">
-		<!-- Header actions start -->
+    <div class="toggle-btns">
+        <a id="toggle-sidebar" href="#">
+            <i class="icon-menu1"></i>
+        </a>
+        <a id="pin-sidebar" href="#">
+            <i class="icon-menu1"></i>
+        </a>
+    </div>
+    <div class="header-items">
+        <!-- Header actions start -->
         <ul class="header-actions">
             <li class="dropdown">
                 @if (User.Identity.IsAuthenticated)
@@ -27,10 +27,15 @@
                                 <h5>Hello, @User.Identity?.Name</h5>
                                 <p>@User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value</p>
                             </div>
-                            <a href="user-profile.html"><i class="icon-user"></i> My Profile</a>
-                            <form asp-controller="Auth" asp-action="Logout" method="post">
-                                <button type="submit" class="dropdown-item"><i class="icon-log-out1"></i> Sign Out</button>
-                            </form>
+                            <a class="nav-link" asp-controller="Profile" asp-action="Index">
+                                <i class="icon-user"></i> My Profile
+                            </a>
+
+                            <form id="logoutForm" asp-controller="Auth" asp-action="Logout" method="post" style="display:none;"></form>
+                            <a href="javascript:void(0);" onclick="document.getElementById('logoutForm').submit();">
+                                <i class="icon-log-out1"></i> Sign Out
+                            </a>
+
                         </div>
                     </div>
                 }
@@ -40,6 +45,6 @@
                 }
             </li>
         </ul>
-		<!-- Header actions end -->
-	</div>
+        <!-- Header actions end -->
+    </div>
 </header>

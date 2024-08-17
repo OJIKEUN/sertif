@@ -1,0 +1,157 @@
+﻿@using sertif.ViewModels
+@model ProfileViewModel
+
+<div class="card h-100 mt-3">
+    <div class="card-header">
+        <div class="card-title">Update Profile</div>
+    </div>
+    <div class="card-body">
+        <form asp-action="Update" method="post">
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="Role" />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Username">Username</label>
+                        <input asp-for="Username" class="form-control" placeholder="Enter username" readonly/>
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FullName">Full Name</label>
+                        <input asp-for="FullName" class="form-control" placeholder="Enter full name" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+
+                    @if (Model.Role == UserRole.Student)
+                    {
+                        <div class="form-group">
+                            <label asp-for="NIS">NIS</label>
+                            <input asp-for="NIS" class="form-control" placeholder="Enter NIS" />
+                            <span asp-validation-for="NIS" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Class">Class</label>
+                            <select asp-for="Class" class="form-control">
+                                <option value="">Select Class</option>
+                                <option value="10A">10 A</option>
+                                <option value="10B">10 B</option>
+                                <option value="11A">11 A</option>
+                                <option value="11B">11 B</option>
+                                <option value="12A">12 A</option>
+                                <option value="12B">12 B</option>
+                            </select>
+                            <span asp-validation-for="Class" class="text-danger"></span>
+                        </div>
+                    }
+                    else if (Model.Role == UserRole.Laboran)
+                    {
+                        <div class="form-group">
+                            <label asp-for="NIP">NIP</label>
+                            <input asp-for="NIP" class="form-control" placeholder="Enter NIP" />
+                            <span asp-validation-for="NIP" class="text-danger"></span>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <label asp-for="Gender">Gender</label>
+                        <select asp-for="Gender" class="form-control">
+                            <option value="">Select Gender</option> 
+                            <option value="Man">Man</option>
+                            <option value="Woman">Woman</option>
+                        </select>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="Religion">Religion</label>
+                        <select asp-for="Religion" class="form-control">
+                            <option value="">Select Religion</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Konghucu">Konghucu</option>
+                        </select>
+                        <span asp-validation-for="Religion" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="PlaceOfBirth">Place of Birth</label>
+                        <input asp-for="PlaceOfBirth" class="form-control" placeholder="Enter place of birth" />
+                        <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="DateOfBirth">Date of Birth</label>
+                        <input asp-for="DateOfBirth" class="form-control" type="date" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+
+                    @if (Model.Role == UserRole.Student)
+                    {
+                        <div class="form-group">
+                            <label asp-for="HomeAddress">Home Address</label>
+                            <input asp-for="HomeAddress" class="form-control" placeholder="Enter home address" />
+                            <span asp-validation-for="HomeAddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FatherName">Father's Name</label>
+                            <input asp-for="FatherName" class="form-control" placeholder="Enter father's name" />
+                            <span asp-validation-for="FatherName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MotherName">Mother's Name</label>
+                            <input asp-for="MotherName" class="form-control" placeholder="Enter mother's name" />
+                            <span asp-validation-for="MotherName" class="text-danger"></span>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="text-end mt-3">
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger mt-3">
+        <strong>Errors:</strong>
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        title: 'Success!',
+                        text: '@TempData["SuccessMessage"]',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+            </text>
+        }
+                });
+    </script>
+}
