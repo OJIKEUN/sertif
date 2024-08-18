@@ -11,7 +11,6 @@ public class ProfileViewModel
     // Fields untuk Student
     public int? StudentId { get; set; }  // Tambahkan ini
     public int? NIS { get; set; }
-    [Required(ErrorMessage = "Please select a class")]
     public string? Class { get; set; }
     [Required(ErrorMessage = "Please select a gender")]
     public string? Gender { get; set; }

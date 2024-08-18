@@ -71,8 +71,6 @@ public class ProfileController : Controller
         return View(viewModel);
     }
 
-
-
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(ProfileViewModel model)

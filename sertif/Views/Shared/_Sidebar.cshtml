@@ -1,10 +1,8 @@
 ﻿<nav id="sidebar" class="sidebar-wrapper">
-
     <!-- Sidebar brand start  -->
     <div class="w-100 d-flex">
         <a class="navbar-brand mx-auto flex-fill text-center" href="#" style="margin-top:20px;">
             <h5>E-Labor</h5>
-            @* <img src="img/LOGO.png" width="auto" height="24" alt="Website Logo" class="d-block mx-auto"> *@
         </a>
     </div>
     <hr style="margin-top:1rem;margin-bottom:0;"> <!-- Sidebar brand end  -->
@@ -15,27 +13,27 @@
         <div class="sidebar-menu">
             <ul>
                 <li class="header-menu">General</li>
-
-                <!-- Dashboard menu item -->
                 <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
                     <a href="@Url.Action("Index", "Home")">
                         <i class="icon-devices_other"></i>
                         <span class="menu-text">Dashboard</span>
                     </a>
                 </li>
+                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Profile" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+                    <a href="@Url.Action("Index", "Profile")">
+                        <i class="icon-user"></i>
+                        <span class="menu-text">My Profile</span>
+                    </a>
+                </li>
+                <!-- New Manage Account menu item -->
+                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "AccountManagement" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+                    <a href="@Url.Action("Index", "AccountManagement")">
+                        <i class="icon-users"></i>
+                        <span class="menu-text">Manage Account</span>
+                    </a>
+                </li>
 
-                <li>
-                    <a href="chat.html">
-                        <i class="icon-message-circle"></i>
-                        <span class="menu-text">Chat</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="chat.html">
-                        <i class="icon-message-circle"></i>
-                        <span class="menu-text">Chat</span>
-                    </a>
-                </li>
+                <!-- Other items -->
             </ul>
         </div>
         <!-- sidebar menu end -->
