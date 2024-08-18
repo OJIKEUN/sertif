@@ -14,6 +14,10 @@ namespace sertif.Data
 		public DbSet<User> Users { get; set; }
 		public DbSet<Student> Students { get; set; }
 		public DbSet<Laboran> Laborans { get; set; }
+        public DbSet<Equipment> Equipments { get; set; }
+        public DbSet<Loan> Loans { get; set; }
+		public DbSet<Class> Classs { get; set; }
+
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

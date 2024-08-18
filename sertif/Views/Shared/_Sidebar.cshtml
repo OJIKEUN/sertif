@@ -25,13 +25,24 @@
                         <span class="menu-text">My Profile</span>
                     </a>
                 </li>
-                <!-- New Manage Account menu item -->
-                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "AccountManagement" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
-                    <a href="@Url.Action("Index", "AccountManagement")">
-                        <i class="icon-users"></i>
-                        <span class="menu-text">Manage Account</span>
-                    </a>
-                </li>
+                @if (User.IsInRole("Laboran"))
+                {
+                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "AccountManagement" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+                        <a href="@Url.Action("Index", "AccountManagement")">
+                            <i class="icon-users"></i>
+                            <span class="menu-text">Manage Account</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole("Laboran"))
+                {
+                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Equipment" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+                        <a href="@Url.Action("Index", "Equipment")">
+                            <i class="icon-book-open"></i>
+                            <span class="menu-text">Manage Equipment</span>
+                        </a>
+                    </li>
+                }
 
                 <!-- Other items -->
             </ul>

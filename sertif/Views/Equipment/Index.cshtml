@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Manage Equipments";
+}
+<link href="~/vendor/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+<link href="~/vendor/bootstrap-table/bootstrap-table-sticky-header.css" rel="stylesheet" />
+
+<div class="row gutters mt-2">
+    <div class="card">
+        <div class="card-header">Manage Equipment</div>
+        <hr class="m-0" />
+        <div id="toolbar">
+            <div class="btn-group me-2">
+                <a class="btn btn-primary " asp-action="Create">Create Account</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table id="table"
+                   data-toggle="table"
+                   data-locale="en-US"
+                   data-sticky-header="true"
+                   data-sticky-header-offset-y="60"
+                   data-search="true"
+                   data-toolbar="#toolbar"
+                   data-search-highlight="true"
+                   data-search-align="right"
+                   data-show-toggle="true"
+                   data-show-refresh="true"
+                   data-show-columns="true"
+                   data-buttons="[]"
+                   data-key-events="true"
+                   data-url="@Url.Action("GetData", "Equipment")"
+                   data-pagination="true"
+                   data-show-export="true"
+                   data-export-data-type="all"
+                   data-export-types="['sql', 'excel', 'pdf']"
+                   data-page-size="50">
+                <thead>
+                    <tr>
+                        <th data-field="name" data-sortable="true">Name</th>
+                        <th data-field="description" data-sortable="true">Description</th>
+                        <th data-field="quantityAvailable" data-sortable="true">Quantity Available</th>
+                        <th data-field="actions" data-formatter="actionFormatter" class="text-center no-space-three" data-width="50">Actions</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/vendor/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/vendor/bootstrap-table/bootstrap-table-sticky-header.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.5/dist/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.29.0/tableExport.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function actionFormatter(value, row, index) {
+            return `
+                            <a href="@Url.Action("Edit", "Equipment")?id=${row.equipmentId}" class="btn btn-info btn-sm shadow">Edit</a>
+                            <a href="#" class="btn btn-danger btn-sm shadow" onclick="confirmDelete(${row.equipmentId})">Delete</a>
+                        `;
+        }
+
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteRecord(id);
+                }
+            });
+        }
+
+        function deleteRecord(id) {
+            $.ajax({
+                url: '@Url.Action("DeleteConfirmed", "Equipment")',
+                type: 'POST',
+                data: { id: id },
+                success: function (data) {
+                    if (data.success) {
+                        $('#table').bootstrapTable('refresh');
+                        Swal.fire("Deleted!", "The equipment has been deleted.", "success");
+                    } else {
+                        Swal.fire("Error!", "Failed to delete the equipment.", "error");
+                    }
+                },
+                error: function () {
+                    Swal.fire("Error!", "An error occurred while deleting the equipment.", "error");
+                }
+            });
+        }
+
+        $(function () {
+            var successMessage = "@TempData["SuccessMessage"]";
+            if (successMessage) {
+                Swal.fire("Success!", successMessage, "success");
+            }
+        });
+    </script>
+}
