@@ -1,0 +1,34 @@
+﻿@model sertif.ViewModels.LoanViewModel
+
+<h2>Loan Equipment</h2>
+
+<form asp-action="Loan">
+    <input type="hidden" asp-for="EquipmentId" />
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <input asp-for="Description" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="QuantityAvailable" class="control-label"></label>
+        <input asp-for="QuantityAvailable" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Reason" class="control-label"></label>
+        <textarea asp-for="Reason" class="form-control"></textarea>
+        <span asp-validation-for="Reason" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="QuantityBorrowed" class="control-label"></label>
+        <input asp-for="QuantityBorrowed" class="form-control" />
+        <span asp-validation-for="QuantityBorrowed" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LoanDate" class="control-label"></label>
+        <input asp-for="LoanDate" class="form-control" readonly />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

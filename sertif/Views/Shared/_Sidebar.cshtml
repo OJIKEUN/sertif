@@ -43,6 +43,36 @@
                         </a>
                     </li>
                 }
+                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Loan" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+                    <a href="@Url.Action("Index", "Loan")">
+                        <i class="icon-folder-plus"></i>
+                        <span class="menu-text">Loans</span>
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Loan" && ViewContext.RouteData.Values["action"].ToString() == "MyLoans" ? "active" : "")">
+                    <a href="@Url.Action("MyLoans", "Loan")">
+                        <i class="icon-folder2"></i>
+                        <span class="menu-text">My Loans</span>
+                    </a>
+                </li>
+                @if (User.IsInRole("Laboran"))
+                {
+                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Laboran" && ViewContext.RouteData.Values["action"].ToString() == "Approvals" ? "active" : "")">
+                        <a href="@Url.Action("Approvals", "Laboran")">
+                            <i class=icon-file-text></i>
+                            <span class="menu-text">Loan Approvals</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole("Laboran"))
+                {
+                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Laboran" && ViewContext.RouteData.Values["action"].ToString() == "UserLoans" ? "active" : "")">
+                        <a href="@Url.Action("UserLoans", "Laboran")">
+                            <i class="icon-save2"></i>
+                            <span class="menu-text">Record Loans</span>
+                        </a>
+                    </li>
+                }
 
                 <!-- Other items -->
             </ul>

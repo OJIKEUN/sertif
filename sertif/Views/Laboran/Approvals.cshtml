@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Loan>
+
+<h2>Loan Approvals</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Equipment Name</th>
+            <th>Student Name</th>
+            <th>Reason</th>
+            <th>Quantity Borrowed</th>
+            <th>Loan Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model)
+        {
+            <tr>
+                <td>@loan.Equipment.Name</td>
+                <td>@loan.User.FullName</td>
+                <td>@loan.Reason</td>
+                <td>@loan.QuantityBorrowed</td>
+                <td>@loan.LoanDate.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <form asp-action="Approve" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@loan.LoanId" />
+                        <button type="submit" class="btn btn-success">Approve</button>
+                    </form>
+                    <form asp-action="Reject" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@loan.LoanId" />
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+            </tr>
+        }
+    </tbody>
+</table>

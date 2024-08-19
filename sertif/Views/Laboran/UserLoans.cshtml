@@ -1,0 +1,29 @@
+﻿@model IEnumerable<sertif.Models.Loan>
+
+<h2>User Loans</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Equipment Name</th>
+            <th>Quantity Borrowed</th>
+            <th>Loan Date</th>
+            <th>Status</th>
+            <th>Return Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model)
+        {
+            <tr>
+                <td>@loan.User.FullName</td>
+                <td>@loan.Equipment.Name</td>
+                <td>@loan.QuantityBorrowed</td>
+                <td>@loan.LoanDate.ToString("yyyy-MM-dd")</td>
+                <td>@loan.Status.ToString()</td>
+                <td>@loan.ReturnDate?.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    </tbody>
+</table>

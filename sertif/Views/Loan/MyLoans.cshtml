@@ -1,0 +1,39 @@
+﻿@model IEnumerable<sertif.Models.Loan>
+
+<h2>My Loans</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Reason</th>
+            <th>Quantity Borrowed</th>
+            <th>Loan Date</th>
+            <th>Return Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model)
+        {
+            <tr>
+                <td>@loan.Equipment.Name</td>
+                <td>@loan.Reason</td>
+                <td>@loan.QuantityBorrowed</td>
+                <td>@loan.LoanDate.ToString("yyyy-MM-dd")</td>
+                <td>@loan.ReturnDate?.ToString("yyyy-MM-dd")</td>
+                <td>@loan.Status.ToString()</td>
+                <td>
+                    @if (loan.Status == LoanStatus.Approved)
+                    {
+                        <form asp-action="Return" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@loan.LoanId" />
+                            <button type="submit" class="btn btn-warning">Return</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

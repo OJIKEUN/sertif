@@ -1,0 +1,27 @@
+﻿@model IEnumerable<sertif.ViewModels.LoanViewModel>
+
+<h2>Available Equipment</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Quantity Available</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.QuantityAvailable</td>
+                <td>
+                    <a asp-action="Loan" asp-route-id="@item.EquipmentId" class="btn btn-primary">Borrow</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
